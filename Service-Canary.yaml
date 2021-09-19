@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: token-test-canary-service
+spec:
+  selector:
+    app: token-test
+    state: canary
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8443
+      name: token-port
