@@ -1,0 +1,14 @@
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: token-test-stable-service
+spec:
+  selector:
+    app: token-test
+    state: stable
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8443
+      name: token-port
