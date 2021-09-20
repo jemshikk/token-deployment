@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: token-test-ingress
@@ -13,29 +13,37 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: token-test-active-service
-              servicePort: 443
+              service: 
+                name: token-test-active-service
+                port: 
+                  number: 443
     - host: stable.token-test.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: token-test-stable-service
-              servicePort: 443
+              service: 
+                name: token-test-stable-service
+                port: 
+                  number: 443
     - host: canary.token-test.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: token-test-canary-service
-              servicePort: 443
+              service: 
+                name: token-test-canary-service
+                port: 
+                  number: 443
     - host: root.token-test.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: token-test-root-service
-              servicePort: 443
+              service: 
+               name: token-test-root-service
+               port: 
+                 number: 443
