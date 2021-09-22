@@ -1,6 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
+  labels:
+    app: token-test-rollout
+    appType: spring-boot
   name: token-test-rollout
 spec:
   replicas: null
