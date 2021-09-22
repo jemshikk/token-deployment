@@ -8,10 +8,10 @@ metadata:
     prometheus.io/path: '/actuator/prometheus'
     prometheus.io/path: '8443'
 spec:
-#   ports:
-#   - name: iks-metric
-#     port: 8443
-#     targetPort: 8443
+  ports:
+  - name: iks-metric
+    port: 8443
+    targetPort: 8443
   selector:
     app: token-test-rollout
 
