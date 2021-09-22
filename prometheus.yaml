@@ -17,16 +17,35 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: token-test-rollout
   labels:
-    service-monitor: token-test-rollout
+    release: monitoring2
+  name: token-test-rollout
+  namespace: sample
 spec:
+  endpoints:
+    - path: /actuator/prometheus
+      port: https
+  namespaceSelector:
+    matchNames:
+      - sample
   selector:
     matchLabels:
-      app: token-test-rollout
-  endpoints:
-  - port: https
-    path: /actuator/prometheus
+      app.kubernetes.io/name: token-test-rollout
+      
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: token-test-rollout
+#   labels:
+#     service-monitor: token-test-rollout
+# spec:
+#   selector:
+#     matchLabels:
+#       app: token-test-rollout
+#   endpoints:
+#   - port: https
+#     path: /actuator/prometheus
+    
     
 # kind: Service
 # apiVersion: v1
