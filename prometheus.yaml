@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-metrics-demo
+  name: token-test-rollout
   labels:
-    app: k8s-metrics-demo
+    app: token-test-rollout
 spec:
   type: NodePort
   ports:
@@ -12,18 +12,18 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: k8s-metrics-demo
+    app: token-test-rollout
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: k8s-metrics-demo
+  name: token-test-rollout
   labels:
     service-monitor: k8s-metrics-demo
 spec:
   selector:
     matchLabels:
-      app: k8s-metrics-demo
+      app: token-test-rollout
   endpoints:
   - port: https
     path: /actuator/prometheus
