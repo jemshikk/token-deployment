@@ -10,7 +10,7 @@ spec:
   - port: 8443
     targetPort: 8443
     protocol: TCP
-    name: http
+    name: https
   selector:
     app: token-test-rollout
 ---
