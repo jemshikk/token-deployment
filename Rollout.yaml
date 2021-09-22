@@ -29,13 +29,13 @@ spec:
             requests:
               cpu: 20m
               memory: 40Mi
-          volumeMounts:
-          - name: config-volume
-            mountPath: /etc/prometheus    
-        volumes:  
+        volumeMounts:
         - name: config-volume
-          configMap:
-            name: prometheus-config
+          mountPath: /etc/prometheus    
+      volumes:  
+      - name: config-volume
+        configMap:
+          name: prometheus-config
   strategy:
     canary:
       canaryService: token-test-preview-service
