@@ -5,9 +5,10 @@ metadata:
   labels:
     app: token-test-rollout
 spec:
-  type: NodePort
+  #type: NodePort
   ports:
-  - port: 8443
+  - name: management
+    port: 8443
     targetPort: 8443
     protocol: TCP
     name: https
@@ -24,7 +25,7 @@ metadata:
 spec:
   endpoints:
     - path: /actuator/prometheus
-      port: https
+      port: management
   namespaceSelector:
     matchNames:
       - sample
