@@ -29,9 +29,9 @@ spec:
             requests:
               cpu: 20m
               memory: 40Mi
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/prometheus    
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/prometheus    
       volumes:  
       - name: config-volume
         configMap:
