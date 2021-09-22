@@ -19,7 +19,7 @@ kind: ServiceMonitor
 metadata:
   name: token-test-rollout
   labels:
-    service-monitor: k8s-metrics-demo
+    service-monitor: token-test-rollout
 spec:
   selector:
     matchLabels:
