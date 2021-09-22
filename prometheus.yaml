@@ -1,38 +1,60 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: token-test-rollout
-  labels:
-    app: token-test-rollout
+  name: service-metrics
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/scheme: 'https'
+    prometheus.io/path: '/actuator/prometheus'
+    prometheus.io/path: 8443
 spec:
-  #type: NodePort
-  ports:
-  - name: management
-    port: 8443
-    targetPort: 8443
-    protocol: TCP
-    name: https
+#   ports:
+#   - name: iks-metric
+#     port: 8443
+#     targetPort: 8443
   selector:
     app: token-test-rollout
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    release: monitoring2
-  name: token-test-rollout
-  namespace: sample
-spec:
-  endpoints:
-    - path: /actuator/prometheus
-      port: management
-  namespaceSelector:
-    matchNames:
-      - sample
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: token-test-rollout
-      
+
+
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: token-test-rollout
+#   labels:
+#     app: token-test-rollout
+# spec:
+#   #type: NodePort
+#   ports:
+#   - name: management
+#     port: 8443
+#     targetPort: 8443
+#     protocol: TCP
+#     name: https
+#   selector:
+#     app: token-test-rollout
+# ---
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   labels:
+#     release: monitoring2
+#   name: token-test-rollout
+#   namespace: sample
+# spec:
+#   endpoints:
+#     - path: /actuator/prometheus
+#       port: management
+#   namespaceSelector:
+#     matchNames:
+#       - sample
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/name: token-test-rollout
+  
+  
+  
+  
 # apiVersion: monitoring.coreos.com/v1
 # kind: ServiceMonitor
 # metadata:
