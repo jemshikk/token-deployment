@@ -1,3 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-metrics-demo
+  labels:
+    app: k8s-metrics-demo
+spec:
+  type: NodePort
+  ports:
+  - port: 8443
+    targetPort: 8443
+    protocol: TCP
+    name: http
+  selector:
+    app: k8s-metrics-demo
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: k8s-metrics-demo
+  labels:
+    service-monitor: k8s-metrics-demo
+spec:
+  selector:
+    matchLabels:
+      app: k8s-metrics-demo
+  endpoints:
+  - port: https
+    path: /actuator/prometheus
+    
 # kind: Service
 # apiVersion: v1
 # metadata:
@@ -12,18 +42,18 @@
 #   selector:
 #     app: token
     
-apiVersion: v1
-kind: Service
-metadata:
-  name: service-metrics
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/scheme: 'https'
-    prometheus.io/path: '/actuator/prometheus'
-spec:
-  ports:
-  - name: iks-metric
-    port: 8443
-    targetPort: 8443
-  selector:
-    app: token
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: service-metrics
+#   annotations:
+#     prometheus.io/scrape: 'true'
+#     prometheus.io/scheme: 'https'
+#     prometheus.io/path: '/actuator/prometheus'
+# spec:
+#   ports:
+#   - name: iks-metric
+#     port: 8443
+#     targetPort: 8443
+#   selector:
+#     app: token
