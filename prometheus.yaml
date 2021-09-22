@@ -6,7 +6,7 @@ metadata:
     prometheus.io/scrape: 'true'
     prometheus.io/scheme: 'https'
     prometheus.io/path: '/actuator/prometheus'
-    prometheus.io/path: 8443
+    prometheus.io/path: '8443'
 spec:
 #   ports:
 #   - name: iks-metric
