@@ -1,11 +1,9 @@
-apiVersion: argoproj.io/v1alpha1
+]apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  labels:
-    app: token-test-rollout
-    appType: spring-boot
   name: token-test-rollout
-  namespace: sample
+  labels:
+    env: us-west-2
 spec:
   replicas: null
   revisionHistoryLimit: 2
@@ -16,26 +14,16 @@ spec:
     metadata:
       labels:
         app: token-test
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "9090"
     spec:
       containers:
         - name: app
-          image: token-service:attempt2
+          image: token-service:attempt3
           ports:
             - containerPort: 8443
           resources:
             requests:
               cpu: 20m
               memory: 40Mi
-          volumeMounts:
-          - name: config-volume
-            mountPath: /etc/prometheus    
-      volumes:  
-      - name: config-volume
-        configMap:
-          name: prometheus-config
   strategy:
     canary:
       canaryService: token-test-preview-service
@@ -65,3 +53,17 @@ spec:
         - setWeight: 50
         - pause:
             duration: 30s
+      analysis:
+        templates:
+        - templateName: success-rate
+        startingStep: 2
+        args:
+        - name: app-name
+          value: token-test
+        - name: pod-hash
+          valueFrom:
+            podTemplateHashValue: Latest
+        - name: env
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['env']
