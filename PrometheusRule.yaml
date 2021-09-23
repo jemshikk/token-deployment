@@ -14,7 +14,7 @@ spec:
     # in other namespaces
     - name: intuit.identity-privacy-token-usw2-ppd-prf.token.health.rules
       rules:
-        - expr: ((sum by(app,namespace,pod)(rate(http_server_requests_seconds_count[1m]))-(sum by(app,namespace,pod)(rate(http_server_requests_seconds_count{status=~"2[0-9]+"}[1m]))) OR on() vector(0))/sum by(app,namespace,pod)(rate(http_server_requests_seconds_count[1m])))*100
+        - expr: rate(http_server_requests_seconds_count[1m])
           # with metrics in other namespaces
           record: identity_privacy_token_availability_metrics
           # add this label if you want to also send this metric to wavefront
