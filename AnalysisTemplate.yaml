@@ -11,8 +11,7 @@ spec:
   - name: success-rate
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
-    successCondition: result == 2
-    failureCondition: result == 0
+    successCondition: len(result) != 0
     failureLimit: 3
     provider:
       prometheus:
